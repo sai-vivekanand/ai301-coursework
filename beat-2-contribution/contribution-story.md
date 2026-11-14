@@ -1,40 +1,16 @@
 # Contribution: Add usage examples to mm tags --help
 
-Path: `beat-2-contribution/contribution-story.md`
-
-This file is Assignment 5, and it is graded at the path above; a copy kept anywhere else in
-the repository is not read. **Keep every section header below under its exact name** — the
-format criteria grade exactly that. Your course repo link is the whole submission: no tool
-files and no evidence uploads are part of Assignment 5.
-
 **Contribution Number:** [1]
 **Student:** Sai Vivekanand Reddy Vangala
 **GitHub Username:** sai-vivekanand
 **Issue:** https://github.com/memtomem/memtomem/issues/3049
-**Pull Request:** [GitHub PR link, once opened]
-
-One repository, built across units 5 to 8, telling the whole story of your real
-contribution. Fill it as you work, not at the end — the sections below ask for evidence that
-is far easier to write down as it happens than to reconstruct in the last weekend.
-
-Contribution Number stays `[1]` unless you make more than one contribution this term; it
-just numbers them.
+**Pull Request:** https://github.com/memtomem/memtomem/pull/3356
 
 ---
 
 ## Toolkit
 
-Every story section below, from Why I Chose This Issue through Pull
-Request, ends with a Toolkit block: which tool did that phase's work
-and how you used it, what it produced, what difficulties or
-shortcomings it presented, and what you changed or would change
-because of them. Together the blocks are the thread the rubric's
-Toolkit points read, and they are the raw material for your unit-9
-portfolio, so keep them current as you work rather than
-reconstructing them later.
-
-A Toolkit block looks like this (copy it into each story section and
-fill it there):
+Toolkit example retained from the course template:
 
 ```text
 **Toolkit**
@@ -46,14 +22,6 @@ fill it there):
   update, or "nothing"]
 ```
 
-This section also keeps one short dated entry per week of tool work,
-starting below: what you built or changed that week, what broke, and
-what you changed because of it. The blocks tell the story where it
-happened; these entries are the toolkit's own timeline.
-
-All four entries are graded. Keep every heading below, and fill each
-one in the week it belongs to.
-
 **Unit 5: Adapting issue-scout to a Python CLI contribution**
 
 2026-11-13: I configured the scout around Python, developer tools and small testable changes, using my earlier rubric and a broad-search strategy. I used direct grading on memtomem #3049 and #3050; both were accepted as straightforward, and I chose #3049. I then ran the full two-query funnel: 200 returned results became 165 unassigned recent survivors and five graded candidates, all accepted. Four came from one repository, so I would add repository diversity and use whole-word keyword matching in a future strategy revision.
@@ -62,15 +30,13 @@ one in the week it belongs to.
 
 2026-11-13: I installed the voice guard with an Upstream section covering claims, questions and pings, and added a local repository memory file with commands, conventions and the issue context. The wiring test blocked a comment with no body, and the real claim passed before posting. A Claude command initially consumed the prompt as part of its allowed-tools argument; separating the prompt with `--` fixed it, and an explicit Python interpreter avoided the older environment's startup problem.
 
-**Unit 7: [one line on the tool work]**
+**Unit 7: A ship-gate with an honest baseline exclusion**
 
-[2-4 sentences: the ship-gate and your gate manifest. What it produced
-on your real branch, what fought you, what changed because of it.]
+2026-11-13: I installed the ship-gate and wrote a manifest using the issue's focused tests, broader CLI/tag/docs tests and the repository's Ruff commands. The gate passed all four runnable checks and accepted the PR package; the full baseline suite's Git-version failure is explicitly excluded and disclosed. The hook summary initially showed only one stop although both logs recorded it, and the PR review caught an output excerpt whose indentation had been normalized, so I checked the logs and corrected the excerpt before rerunning the gate.
 
-**Unit 8: [one line on the tool work]**
+**Unit 8: Checking the monitor against the actual PR thread**
 
-[2-4 sentences: the PR-monitor and your playbook. What it read, what it
-drafted, what you did with the draft.]
+2026-11-14: I installed the PR monitor and wrote a four-section playbook using the repository's response windows and five recent outside-contributor PRs. It classified the CLA bot's comment as FEEDBACK-IN, but its drafted move correctly said there was no review response to post and that the agreement required my own action; I kept the wait note local. The aggregate check count did not identify the failure, so I inspected the named GitHub checks and confirmed it was the unsigned CLA, then recorded human feedback as none yet rather than calling the bot message a review.
 
 ---
 
@@ -166,7 +132,7 @@ Commands:
 
 **Analysis**
 
-At upstream ee619385f2f9f9997d092a72ac79a9039bad4b09, `uv run mm tags --help` exits 0 but has no Examples block or --apply/--yes explanation. The tags group in packages/memtomem/src/memtomem/cli/tags_cmd.py has only a docstring and no epilog. The six existing TestHelpEpilog tests pass but do not cover tags. Full local evidence is ../unit6/repro-draft.md; repro-check accepted it. This is a help-text omission, not a tag mutation defect.
+At upstream ee619385f2f9f9997d092a72ac79a9039bad4b09, `uv run mm tags --help` exits 0 but has no Examples block or --apply/--yes explanation. The tags group in packages/memtomem/src/memtomem/cli/tags_cmd.py has only a docstring and no epilog. The six existing TestHelpEpilog tests pass but do not cover tags. The Reproduction Process section above contains the captured evidence; repro-check accepted the local draft. This is a help-text omission, not a tag mutation defect.
 
 **Proposed Solution**
 
@@ -179,30 +145,35 @@ Add a TAGS_EPILOG string and attach it to the existing Click group, matching the
 3. Re-run the focused tests and mm tags --help. Run manifest tests, lint and format; compare any unrelated failures against unchanged main. Save before/after evidence in test_evidence.md.
 4. Keep the PR to these two files, use Fixes #3049, disclose AI assistance, and run the ship-gate before opening it.
 
-No deviations so far. Existing width loop includes search, add, recall and index; preserve all four even though the issue quotes an older version. No reproduction report or plan comment will be posted upstream.
+No implementation scope changes; the validation adjustment is recorded below. The existing width loop includes search, add, recall and index; preserve all four even though the issue quotes an older version. No reproduction report or plan comment will be posted upstream.
+
+Review notes (2026-11-13): PR #3013 is still open; re-check before opening our PR and preserve both additions if it merges. The branch is codex/3049-tags-help. The manifest names the CI selection `pytest -m "not ollama and not llm"`, Ruff lint and Ruff format; it uses an absolute uv executable path. Local working files are excluded by the ship-gate installer. A separate voice review read the canonical guide and its symlink successfully and found no broken rule.
+
+Validation adjustment (2026-11-13): the full baseline CI selection has one unrelated failure because Git 2.42.0 does not support worktree add --relative-paths and the test does not recognize its error spelling. Reproduced that test separately before the help implementation. Move the full check to the dated exclusion table and gate on the issue-named focused test, broader CLI/tags/docs tests and repository-wide Ruff checks. Disclose the baseline failure and that the full suite was not rerun after the help change. No code scope change.
 
 **Toolkit**
 
-- Tool: plan-check, used on plan.md and a private plan-comment.md with the accepted local reproduction.
-- What it produced: accept with all five required checks passing.
-- Difficulties: the grader reported the voice guide missing even though the installed path is a valid symlink; its required rubric verdict passed, and a separate review of the canonical guide and symlink found no broken rule. It also identified the risk of overlapping work in PR #3013.
-- What changed: kept local evidence excluded from commits and will check upstream changes before opening the PR. The plan comment remains local as the course requires.
+- Tool: plan-check, run on the local plan and private comment against the accepted reproduction.
+- What it produced: accept before implementation and accept after the validation adjustment.
+- Difficulties: the first grader missed a valid voice-guide symlink; the full baseline run later revealed an unrelated Git-version failure.
+- What changed: verified the canonical voice guide in a separate review, documented the baseline failure and updated the plan's validation scope. Neither the report nor the plan comment was posted upstream.
 
 ---
 
 ## Testing Strategy
 
-[What observable checks prove the fix: your reproduction steps re-run
-against the built change (before and after), and the repo's own test
-suite or checks with the outcome shown. "Tests pass" with nothing
-observable named is not a strategy.]
+I first captured `mm tags --help` without an Examples block. The new line-based example assertion and expanded width check then failed on the original implementation: **2 failed, 5 passed**. After adding TAGS_EPILOG, the same class passed: **7 passed**. The actual help now prints all five requested commands and wraps the safety note as prose while preserving each example line.
+
+Broader verification: `uv run pytest packages/memtomem/tests/test_cli.py packages/memtomem/tests/test_tags_cmd.py packages/memtomem/tests/test_docs_guards.py -q` produced **347 passed, 1 warning**. Repository-wide Ruff lint passed and Ruff format reported **1188 files already formatted**, using the CI lint job's path list.
+
+The full baseline selection `uv run pytest -m "not ollama and not llm" --tb=short -q` produced **1 failed, 22596 passed, 426 skipped, 46 deselected, 1 xfailed** in 1324.16 seconds. The failure was `test_worktree_written_with_relative_paths_is_excluded`: local Git 2.42.0 rejects `worktree add --relative-paths` with exit 129, and the test's skip check expects a different error spelling. Rerunning that test alone before the help implementation reproduced the failure. I recorded it in the manifest's dated exclusions; I did not change that unrelated test. The full suite was not rerun after the help change, and GitHub CI must be distinguished from these local results.
 
 **Toolkit**
 
-- Tool:
-- What it produced:
-- Difficulties:
-- What changed:
+- Tool: pytest, Ruff, captured CLI output and the ship manifest.
+- What it produced: before/after regression evidence, 347 passing related tests, repository-wide lint/format passes and a documented baseline failure.
+- Difficulties: the full baseline took about 22 minutes and failed on an unsupported Git option unrelated to the help text.
+- What changed: used the issue's focused test plus broader CLI/tag/docs coverage for the runnable gate checks, disclosed the full-suite limitation and regraded the updated plan.
 
 ---
 
@@ -216,6 +187,14 @@ Claimed #3049 after checking availability and reserved it on the course site. Re
 
 Installed the ship-gate and created a manifest from CI. Both guard logs recorded the expected wiring-test stop, although Claude summarized only one. Plan-check accepted the two-file approach. On branch codex/3049-tags-help, the new example test and expanded width test fail before the implementation: 2 failed, 5 passed. The formatter also caught a wrapping change in the new assertion; I applied the repository formatter.
 
+**2026-11-13**
+
+Added TAGS_EPILOG using the existing raw-paragraph convention and committed the two-file change as `8f8dded`. The help regression went from two failures to seven passes, and the broader CLI/tag/docs run passed 347 tests. Recorded the full-suite baseline Git failure rather than expanding this PR into worktree behavior.
+
+**2026-11-14**
+
+Opened upstream PR #3356 through Claude Code after both guards passed. Ran the installed monitor in state and drafting modes. Its wait note stayed local because there was only a CLA bot request, with no human review to answer. Recorded the PR link and actual status in this story.
+
 **Toolkit**
 
 - Tool: pytest, Ruff and the course plan-check/ship-gate workflow.
@@ -227,27 +206,24 @@ Installed the ship-gate and created a manifest from CI. Both guard logs recorded
 
 ## Pull Request
 
-**PR Link:** [GitHub PR URL when opened]
+**PR Link:** https://github.com/memtomem/memtomem/pull/3356
 
-**PR Description:** [what the PR says; much of the content above
-adapts into it]
+**PR Description:** The PR adds five tags help examples and the preview/apply/yes safety note, with tests for complete example lines, the normalized prose note and terminal width. It includes Fixes #3049, the before/after evidence, 7 passing help tests, 347 passing related tests and repository-wide Ruff results. It explicitly discloses the unrelated full-baseline Git failure, the absence of a post-change full-suite rerun and the extent of Codex/Claude assistance. The repository's template is preserved, with web changes marked N/A and the CLA left pending the contributor's own signature.
 
 **Maintainer Feedback:**
 
-- [Date]: [feedback received, or "none yet"; silence is a normal
-  state and costs you nothing]
-- [Date]: [how you addressed it]
+- 2026-11-14: none yet from a human maintainer. The [CLA bot](https://github.com/memtomem/memtomem/pull/3356#issuecomment-6877750433) requested a signature; the failing status is `CLA / PR #3356`. No review response was posted. The author must read and, if they agree, sign the CLA personally.
 
-**Status:** [Awaiting review / Iterating / Merged / Closed. The
-status is a fact you record, never a grade: the PR is graded as
-opened.]
+**Status:** Awaiting review
+
+At the recorded check, the PR was open and mergeable but behind main, with REVIEW_REQUIRED. GitHub's main test workflow had not reported results. A merge is not required to submit this assignment, and these facts do not imply that CI passed.
 
 **Toolkit**
 
-- Tool:
-- What it produced:
-- Difficulties:
-- What changed:
+- Tool: ship-gate and pr-precheck, followed by Claude Code's guarded `gh pr create`.
+- What it produced: PASS for the four runnable manifest checks and all four PR rubric checks; PR #3356 opened against memtomem/memtomem. The final opening hook reran the gate on November 14 and passed; voice-guard also logged pass.
+- Difficulties: one unrelated baseline failure required an explicit exclusion, and the first description excerpt normalized indentation rather than preserving captured output.
+- What changed: disclosed the baseline limitation, corrected the excerpt, reran the gate and kept the CLA checkbox pending personal action. No local plan, manifest, evidence draft or memory file entered the upstream diff.
 
 ---
 
@@ -255,25 +231,23 @@ opened.]
 
 **Technical Skills Gained**
 
-[What you learned technically, named concretely.]
+This change taught me how Click formats help epilogs: ordinary prose wraps, while a raw paragraph marked with `\b` preserves the example lines. A substring assertion would miss an epilog flattened into one paragraph, so the regression test compares complete output lines and separately normalizes whitespace for the prose note. It also checks the rendered width rather than just the source string length.
 
 **Challenges Overcome**
 
-[What was hard and how you solved it; point at the real events, the
-Toolkit blocks above are full of them.]
+The issue quoted an older version of the test class, so I checked the current code and preserved the newer recall and index coverage. Tool output also needed checking: one hook summary omitted a guard that had logged its stop, and a plan grader missed a valid voice-guide symlink. Reading the underlying logs and guide resolved those discrepancies instead of changing working configuration unnecessarily.
 
 **What I'd Do Differently Next Time**
 
-[Reflection on your process.]
+I would run the broad scout scan earlier and make its ranking more diverse across repositories. I would also estimate the full test suite's runtime before starting it, while still keeping a small regression test that demonstrates the issue directly. A recent issue and a responsive repository improve the chance of useful feedback, but neither guarantees a merge; the contribution needs clear evidence regardless of the outcome.
 
 ---
 
 ## Resources Used
 
-[What actually helped, not a reading list. List things this story
-already shows you using: the doc you followed to set the environment
-up, the thread that explained the bug, the person who answered you.
-One real entry beats ten plausible ones.]
-
-- [Link to documentation that helped]
-- [Discussion, issue, or post that helped]
+- [Issue #3049](https://github.com/memtomem/memtomem/issues/3049): the requested examples, safety note, two-file scope and overlapping-PR warning.
+- [CONTRIBUTING.md](https://github.com/memtomem/memtomem/blob/main/CONTRIBUTING.md): setup, checks, PR template expectations and response windows.
+- [Search help implementation](https://github.com/memtomem/memtomem/blob/ee619385f2f9f9997d092a72ac79a9039bad4b09/packages/memtomem/src/memtomem/cli/search.py): the existing raw-paragraph epilog pattern.
+- [Existing CLI tests](https://github.com/memtomem/memtomem/blob/ee619385f2f9f9997d092a72ac79a9039bad4b09/packages/memtomem/tests/test_cli.py): line-based assertions and the width guard.
+- [Unit 6 materials](https://github.com/codepath/ai301-unit6-starter), [Unit 7 materials](https://github.com/codepath/ai301-unit7-starter) and [Unit 8 materials](https://github.com/codepath/ai301-unit8-starter): guard installation, real-repository scopes, ship-gate and PR monitor.
+- Codex helped inspect the repository, implement the change, run commands and draft this story. Claude Code ran the course grading tools and guarded GitHub commands. The presentation notes use this diff and the captured results as prompts for my own explanation.
