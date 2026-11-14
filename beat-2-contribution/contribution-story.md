@@ -56,7 +56,7 @@ one in the week it belongs to.
 
 **Unit 5: Adapting issue-scout to a Python CLI contribution**
 
-2026-11-13: I configured the scout around Python, developer tools and small testable changes, using my earlier rubric and a broad-search strategy. I used direct grading on memtomem #3049 and #3050; both were accepted as straightforward, and I chose #3049. Direct grading helped compare the candidates, but it is not a completed top-five scan, and I still need that scan for the Unit 5 tool exercise.
+2026-11-13: I configured the scout around Python, developer tools and small testable changes, using my earlier rubric and a broad-search strategy. I used direct grading on memtomem #3049 and #3050; both were accepted as straightforward, and I chose #3049. I then ran the full two-query funnel: 200 returned results became 165 unassigned recent survivors and five graded candidates, all accepted. Four came from one repository, so I would add repository diversity and use whole-word keyword matching in a future strategy revision.
 
 **Unit 6: Guarding my claim and recording repository context**
 
@@ -86,7 +86,7 @@ Claim: https://github.com/memtomem/memtomem/issues/3049#issuecomment-6862609202
 
 - Tool: issue-scout, used in direct-grade mode on #3049 and #3050 with my Python-focused profile and the patched rubric.
 - What it produced: accept and straightforward for both; #3049 ranked first.
-- Difficulties: direct grading does not establish availability or guarantee maintainer responsiveness, and I have not yet completed the broad top-five scan.
+- Difficulties: direct grading does not establish availability or guarantee maintainer responsiveness; the later broad scan concentrated four of five results in one repository and ranked a one-day-old repository first.
 - What changed: replaced Scope fit with scope-feasible, added the non-gating difficulty note, and recorded the dated patch in scan-notes.md.
 
 ---
@@ -185,7 +185,7 @@ No deviations so far. Existing width loop includes search, add, recall and index
 
 - Tool: plan-check, used on plan.md and a private plan-comment.md with the accepted local reproduction.
 - What it produced: accept with all five required checks passing.
-- Difficulties: the grader reported the voice guide missing even though the installed path is a valid symlink; its required rubric verdict passed, but that voice review needs checking against the canonical file. It also identified the risk of overlapping work in PR #3013.
+- Difficulties: the grader reported the voice guide missing even though the installed path is a valid symlink; its required rubric verdict passed, and a separate review of the canonical guide and symlink found no broken rule. It also identified the risk of overlapping work in PR #3013.
 - What changed: kept local evidence excluded from commits and will check upstream changes before opening the PR. The plan comment remains local as the course requires.
 
 ---
